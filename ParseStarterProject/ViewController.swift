@@ -10,122 +10,43 @@
 import UIKit
 import Parse
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ViewController: UIViewController {
     
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    @IBOutlet var username: UITextField!
+    @IBOutlet var password: UITextField!
     
-    @IBAction func pause(sender: AnyObject) {
+    @IBAction func signUp(sender: AnyObject) {
         
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        //UIApplication.sharedApplication().beginIgnoringInteractionEvents()
-        
-    }
-    
-    @IBAction func restore(sender: AnyObject) {
-        
-        activityIndicator.stopAnimating()
-        //UIApplication.sharedApplication().endIgnoringInteractionEvents()
-    }
-    
-    @IBAction func createAlert(sender: AnyObject) {
-       
-        let alert = UIAlertController(title: "Hey there!", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+        if username.text == "" || password.text == "" {
             
-            self.dismissViewControllerAnimated(true, completion: nil)
+            var alert = UIAlertController(title: "Error in form", message: "Please enter a username and password", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction((UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
+            })))
             
-        }))
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
+    @IBAction func login(sender: AnyObject) {
     }
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        
-        print("Image Selected")
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
-        
-        importedImage.image = image
-        
-    }
-
     
-    @IBAction func importImage(sender: AnyObject) {
-        
-        let image = UIImagePickerController()
-        image.delegate = self
-        image.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        image.allowsEditing = false
-        
-        self.presentViewController(image, animated: true, completion: nil)
-        
-    }
     
-    @IBOutlet var importedImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        
-        
-        
-        /*
-        let product = PFObject(className: "Products")
-        
-        product["name"] = "Ice Cream"
-        
-        product["description"] = "Tutti Fruiti"
-        
-        product["price"] = 4.99
-        
-        product.saveInBackgroundWithBlock { (success, error) -> Void in
-            
-            if success == true {
-                
-                print ("Object saved with ID \(product.objectId)")
-                
-            } else {
-                
-                print("Failed")
-                print(error)
-            }
-        
-        }
-
-        let query = PFQuery(className: "Products")
-        
-        query.getObjectInBackgroundWithId("Xy6KrJKO7D", block: { (object: PFObject?, error: NSError? ) -> Void in
-            
-            if error != nil {
-                
-                print(error)
-                
-            } else if let product = object {
-                
-                product["description"] = "Rocky Road"
-                
-                product["price"] = 5.99
-                
-                product.saveInBackground()
-                
-                //print(object!.objectForKey("description"))
-                
-            }
-            
-        })
-*/
     }
-
+    
+        
+        
+        
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
