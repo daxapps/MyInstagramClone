@@ -66,7 +66,7 @@ class ViewController: UIViewController {
             
             
             
-            user.signUpInBackgroundWithBlock({ (succes, error) -> Void in
+            user.signUpInBackgroundWithBlock({ (success, error) -> Void in
                 
                 self.activityIndicator.stopAnimating()
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
@@ -74,6 +74,12 @@ class ViewController: UIViewController {
                 if error == nil {
                     
                     // Signup successful
+                    
+                    //dispatch_async(dispatch_get_main_queue()) {
+                        
+                        self.performSegueWithIdentifier("login", sender: self)
+                        
+                    //}
                     
                 } else {
                     
@@ -87,6 +93,7 @@ class ViewController: UIViewController {
                 }
                 
             })
+                
             } else {
                 
                 PFUser.logInWithUsernameInBackground(username.text!, password: password.text!, block: { (user, error) -> Void in
@@ -97,6 +104,12 @@ class ViewController: UIViewController {
                     if user != nil {
                         
                         // Logged In!
+                        
+                        //dispatch_async(dispatch_get_main_queue()) {
+                        
+                        self.performSegueWithIdentifier("login", sender: self)
+                            
+                        //}
                         
                     } else {
                         
@@ -143,17 +156,22 @@ class ViewController: UIViewController {
     }
     
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
+    override func viewDidAppear(animated: Bool) {
         
+        if PFUser.currentUser() != nil {
+            
+            self.performSegueWithIdentifier("login", sender: self)
+            
+            
+        }
+    
         
-        
+    }
         
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

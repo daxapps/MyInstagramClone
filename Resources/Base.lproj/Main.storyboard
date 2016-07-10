@@ -121,11 +121,57 @@
                         <outlet property="registeredText" destination="hCx-Av-kz3" id="vVH-12-T0d"/>
                         <outlet property="signupButton" destination="Q2I-So-8lM" id="8kH-zh-BtS"/>
                         <outlet property="username" destination="aaZ-2q-ihv" id="C3G-S0-036"/>
+                        <segue destination="fGz-Im-95S" kind="show" identifier="login" id="DfR-GF-Z78"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="307.5" y="179.5"/>
+            <point key="canvasLocation" x="-650.5" y="166.5"/>
+        </scene>
+        <!--User List-->
+        <scene sceneID="J2e-JE-W6e">
+            <objects>
+                <tableViewController id="iXE-Zm-ykR" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="usk-5p-pcU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="N3F-pA-yg9">
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N3F-pA-yg9" id="x8c-h1-TmO">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iXE-Zm-ykR" id="mAD-gc-eN4"/>
+                            <outlet property="delegate" destination="iXE-Zm-ykR" id="xNi-aS-xoh"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="User List" id="XPj-WL-3SC"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rxW-Wg-z1w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="543.5" y="166.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="53F-Sr-aQg">
+            <objects>
+                <navigationController id="fGz-Im-95S" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="c5I-8y-4xW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="iXE-Zm-ykR" kind="relationship" relationship="rootViewController" id="3ie-vO-2AH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y6Y-wI-tTi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-64.5" y="166.5"/>
         </scene>
     </scenes>
 </document>
