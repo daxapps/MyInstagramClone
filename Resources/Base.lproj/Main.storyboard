@@ -63,13 +63,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lm9-gD-ewv">
-                                <rect key="frame" x="209" y="289" width="46" height="26"/>
+                                <rect key="frame" x="209" y="289" width="97" height="26"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="Hl1-FZ-n76"/>
+                                    <constraint firstAttribute="width" constant="97" id="Hl1-FZ-n76"/>
                                 </constraints>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wrS-jn-buQ"/>
+                                    <action selector="logIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JhE-KV-3kl"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlu-lx-MfF">
@@ -116,7 +116,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="loginButton" destination="Lm9-gD-ewv" id="XgO-46-T0D"/>
                         <outlet property="password" destination="Pwj-Nm-cU4" id="Sr1-bL-a7o"/>
+                        <outlet property="registeredText" destination="hCx-Av-kz3" id="vVH-12-T0d"/>
+                        <outlet property="signupButton" destination="Q2I-So-8lM" id="8kH-zh-BtS"/>
                         <outlet property="username" destination="aaZ-2q-ihv" id="C3G-S0-036"/>
                     </connections>
                 </viewController>

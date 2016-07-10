@@ -12,26 +12,134 @@ import Parse
 
 class ViewController: UIViewController {
     
+    var signupActive = true
+    
     @IBOutlet var username: UITextField!
+    
     @IBOutlet var password: UITextField!
+    
+    @IBOutlet var signupButton: UIButton!
+    
+    @IBOutlet var registeredText: UILabel!
+   
+    
+    @IBOutlet var loginButton: UIButton!
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    func displayAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction((UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+            
+        })))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
     
     @IBAction func signUp(sender: AnyObject) {
         
         if username.text == "" || password.text == "" {
             
-            var alert = UIAlertController(title: "Error in form", message: "Please enter a username and password", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction((UIAlertAction(title: "OK", style: .Default, handler: { (action) -> Void in
-                
-                self.dismissViewControllerAnimated(true, completion: nil)
-                
-            })))
+            displayAlert("Error in form", message: "Please enter a username and password")
             
-            self.presentViewController(alert, animated: true, completion: nil)
+        } else {
             
+            activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+            
+            var errorMessage = "Please try again later"
+            
+            if signupActive == true {
+                
+            let user = PFUser()
+            user.username = username.text
+            user.password = password.text
+            
+            
+            
+            user.signUpInBackgroundWithBlock({ (succes, error) -> Void in
+                
+                self.activityIndicator.stopAnimating()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                
+                if error == nil {
+                    
+                    // Signup successful
+                    
+                } else {
+                    
+                    if let errorString = error!.userInfo["error"] as? String {
+                        
+                        errorMessage = errorString
+                        
+                    }
+                    
+                    self.displayAlert("Failed SignUp", message: errorMessage)
+                }
+                
+            })
+            } else {
+                
+                PFUser.logInWithUsernameInBackground(username.text!, password: password.text!, block: { (user, error) -> Void in
+                    
+                    self.activityIndicator.stopAnimating()
+                    UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                    
+                    if user != nil {
+                        
+                        // Logged In!
+                        
+                    } else {
+                        
+                        if let errorString = error!.userInfo["error"] as? String {
+                            
+                            errorMessage = errorString
+                            
+                        }
+                        
+                        self.displayAlert("Failed Login", message: errorMessage)
+                        
+                    }
+                        
+                })
+            }
         }
     }
     
-    @IBAction func login(sender: AnyObject) {
+    @IBAction func logIn(sender: AnyObject) {
+    
+ 
+        
+        if signupActive == true {
+            
+            signupButton.setTitle("Log In", forState: UIControlState.Normal)
+            
+            registeredText.text = "Not registered?"
+            
+            loginButton.setTitle("Sign Up", forState: UIControlState.Normal)
+            
+            signupActive = false
+            
+        } else {
+            
+            signupButton.setTitle("Sign Up", forState: UIControlState.Normal)
+            
+            registeredText.text = "Already registered?"
+            
+            loginButton.setTitle("Login", forState: UIControlState.Normal)
+            
+            signupActive = true
+            
+        }
     }
     
     

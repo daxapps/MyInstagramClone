@@ -35,9 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         Parse.initializeWithConfiguration(configuration)
 
-        // ****************************************************************************
-        // Uncomment and fill in with your Parse credentials:
-        // Parse.setApplicationId("your_application_id", clientKey: "your_client_key")
+        
+        // Parse.setApplicationId("daxapps1", clientKey: "asdfghjkl")
         //
         // If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
         // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
@@ -108,13 +107,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.setDeviceTokenFromData(deviceToken)
         installation.saveInBackground()
 
-        PFPush.subscribeToChannelInBackground("") { (succeeded: Bool, error: NSError?) in
-            if succeeded {
-                print("ParseStarterProject successfully subscribed to push notifications on the broadcast channel.\n");
-            } else {
-                print("ParseStarterProject failed to subscribe to push notifications on the broadcast channel with error = %@.\n", error)
-            }
-        }
+//        PFPush.subscribeToChannelInBackground("") { (succeeded: Bool, error: NSError?) in
+//            if succeeded {
+//                print("ParseStarterProject successfully subscribed to push notifications on the broadcast channel.\n");
+//            } else {
+//                print("ParseStarterProject failed to subscribe to push notifications on the broadcast channel with error = %@.\n", error)
+//            }
+//        }
     }
 
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
